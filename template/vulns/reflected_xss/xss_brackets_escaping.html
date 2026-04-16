@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{%block title%}Reflected XSS Weak Bracket's Encoding 🪲{%endblock%}
+{%block head%}
+   
+{%endblock%}
+{%block body%}
+<div class="container">
+    <div class="row justify-content-center"> <!-- Use justify-content-center on the row -->
+        <div class="col-md-8 text-center"> <!-- col-md-8 limits width, text-center centers content -->
+            <h1>Lab #2 - Reflected XSS Weak Bracket's Encoding 🪲</h1>
+            <hr class="w-100" /> <!-- hr centered by col-8 which is centered -->
+            <div class="child-div">
+                <h3>Search on Stock for Ice Creams ... 🍨</h3>
+                <form method="GET" action=""> 
+                    <input name="query" type="text" class="form-control w-75 m-auto mb-2" placeholder="Ice Cream..." aria-label="Stock quantity" aria-describedby='basic-addon2' />
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                {%if result%}
+                    <div class="mt-5 text-start"> 
+                        {%autoescape off%} {%comment%} <-- this will disable auto escaping (what is protect from reflected xss) {%endcomment%}
+                            <h4>Search Result for {{query}}:</h4>
+                        {%endautoescape%}
+                        <ul class="list-group mt-3">
+                            {% for item_data in result %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ item_data.item }}
+                                    <span class="badge bg-primary rounded-pill">{{ item_data.quantity }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul> 
+                    </div>
+                {%elif query%} 
+                     <div class="mt-5">
+                        {%autoescape off%}
+                        <p class="text-danger">No results found for "{{ query }}".</p>
+                        {%endautoescape%}
+                     </div>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

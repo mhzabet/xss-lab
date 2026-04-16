@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+{%block title%}Home - Labs{%endblock%}
+{%block body%}
+    <div class="container">
+        <h1>
+            List of labs
+        </h1>
+        <div>
+            <h3>Client-side Attacks 🎯</h3>
+            <hr />
+            <div class="list-group mt-2 mb-2">
+                    <h4>1. Cross-site Scripting</h4>
+                    <a href={% url 'vulns:xss-no-protection' %} class="list-group-item list-group-item-dark list-group-item-action" >XSS (No protection) 🪲</a>
+                    <a href={% url 'vulns:xss-brackets-protection'%} class="list-group-item list-group-item-dark list-group-item-action">XSS (weak brackets escaping) 🪲</a>
+                    <a href={% url 'vulns:xss-attributes-no-protection'%} class="list-group-item list-group-item-dark list-group-item-action">XSS on HTML Attributes (no protection) 🪲</a>
+                    <a href={% url 'vulns:xss-javascript-context-no-protection'%} class="list-group-item list-group-item-dark list-group-item-action">XSS on Javascript Context (no protection) 🪲</a>
+                    <a href={% url 'vulns:xss-javascript-context-brackets-escape'%} class="list-group-item list-group-item-dark list-group-item-action">XSS on Javascript Context (brackets esacpe) 🪲</a>
+                    
+            </div>
+            <hr/>
+                <div class="list-group mt-2 mb-2 ">
+                    <h4>2. Cross-site Request Forgery</h4>
+                    <a href="#" class="list-group-item list-group-item-dark list-group-item-action">CSRF (No protection) 🪲</a>
+            </div>
+        </div>
+    </div>
+{%endblock%}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{%block title%}Stored XSS No Protection 🪲{%endblock%}
+{%block head%}
+   
+{%endblock%}
+{%block body%}
+<div class="container">
+    <div class="row justify-content-center"> <!-- Use justify-content-center on the row -->
+        <div class="col-md-8 text-center"> <!-- col-md-8 limits width, text-center centers content -->
+            <h1>Lab #5 - Stored XSS No Protection 🪲</h1>
+            <hr class="w-100" /> <!-- hr centered by col-8 which is centered -->
+            <div class="child-div">
+                <h3>Adding Item's... 🍨</h3>
+                <form method="POST" action=""> 
+                    <input name="item" type="text" class="form-control w-50 m-auto mb-2" placeholder="Ice Cream..." aria-label="adding item to stock" aria-describedby='basic-addon2' />
+                    <input name="quantity" type="number" class="form-control w-50 m-auto mb-2" placeholder="25" aria-label="quantity of item" aria-describedby='basic-addon2' />
+                    {%csrf_token%}
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+                {%if list%}
+                    <div class="mt-5 text-start"> 
+                      <h4>List of Available Items:</h4>
+                       {%autoescape off%}
+                        <ul class="list-group mt-3">
+                            {% for item_data in list %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ item_data.item }}
+                                    <span class="badge bg-primary rounded-pill">{{ item_data.quantity }}</span>
+                                </li>
+                            {% endfor %}
+                            {% endautoescape %}
+                        </ul> 
+                    </div>
+                {%else%} 
+                     <div class="mt-5">
+                        <p class="text-info">No Item Availabe.</p>
+                     </div>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

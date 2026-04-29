@@ -61,9 +61,13 @@ def xss_javascript_context_brackets_escape_view(request):
     return render(request, "vulns/reflected_xss/xss_javascript_context_brackets_escape.html")
 ## Lab 6
 def stored_xss_no_protection_view(request):
+    list_of_item = Stock.objects.all()
+
     if request.method == "POST":
         form = forms.stored_xss_no_protection_form(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, "vulns/stored_xss/stored_xss_no_protection.html")
+            messages.success(request, "Items added successfuly.")
         else:
+            messages.error(request, "Error During adding Items.")
+    return render(request, "vulns/stored_xss/stored_xss_no_protection.html", context={"list":list_of_item})

@@ -16,13 +16,10 @@
                     <a href={% url 'vulns:xss-javascript-context-no-protection'%} class="list-group-item list-group-item-dark list-group-item-action">XSS on Javascript Context (no protection) 🪲</a>
                     <a href={% url 'vulns:xss-javascript-context-brackets-escape'%} class="list-group-item list-group-item-dark list-group-item-action">XSS on Javascript Context (brackets esacpe) 🪲</a>
                     <a href={% url 'vulns:stored-xss-no-protection'%} class="list-group-item list-group-item-dark list-group-item-action">Stored XSS (No protection) 🪲</a>
+                    <a href={% url 'vulns:dom-xss-no-protection'%} class="list-group-item list-group-item-dark list-group-item-action">DOM XSS (No protection) 🪲</a>
 
-            </div>
-            <hr/>
-                <div class="list-group mt-2 mb-2 ">
-                    <h4>2. Cross-site Request Forgery</h4>
-                    <a href="#" class="list-group-item list-group-item-dark list-group-item-action">CSRF (No protection) 🪲</a>
-            </div>
+                </div>
+
         </div>
     </div>
 {%endblock%}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{%block title%}DOM-base XSS No Protection 🪲{%endblock%}
+{%block head%}
+   
+{%endblock%}
+{%block body%}
+<div class="container">
+    <div class="row justify-content-center"> <!-- Use justify-content-center on the row -->
+        <div class="col-md-8 text-center"> <!-- col-md-8 limits width, text-center centers content -->
+            <h1>Lab #7 - DOM-based XSS No Protection 🪲</h1>
+            <hr class="w-100" /> <!-- hr centered by col-8 which is centered -->
+            <div class="child-div">
+                <h3 id='msg'>You can say welcome to your self?</h3>
+                <div id="welcome"></div>
+            </div>          
+            <script>
+                var name = document.location.hash.substring(1)
+                if (name){
+                    document.getElementById("msg").innerText = 'Welcome too you......'
+                    document.getElementById("welcome").innerHTML = "Hello " + decodeURIComponent(name);
+                }
+            </script>     
+        </div>
+    </div>
+</div>
+
+{%endblock%}

@@ -71,3 +71,6 @@ def stored_xss_no_protection_view(request):
         else:
             messages.error(request, "Error During adding Items.")
     return render(request, "vulns/stored_xss/stored_xss_no_protection.html", context={"list":list_of_item})
+## Lab 7
+def dom_xss_no_protection_view(request):
+    return render(request, "vulns/dom_xss/dom_xss_no_protection.html")

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{%block title%} DOM-base XSS DOMPurify Bypass 🪲{%endblock%}
+{%block head%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.0.3/purify.min.js" integrity="sha512-5WY1/Q11lfGkA3Ckj9C4T0CJ4ExZ4Y69y3RV784hj3PG+4X9dx1+9pTosY3kItGnbcE9LFd0virWGBwzHmnzZg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{%endblock%}
+{%block body%}
+<div class="container">
+    <div class="row justify-content-center"> <!-- Use justify-content-center on the row -->
+        <div class="col-md-8 text-center"> <!-- col-md-8 limits width, text-center centers content -->
+            <h1>Lab #9: DOM-base XSS DOMPurify Bypass 🪲</h1>
+            <hr class="w-100" /> <!-- hr centered by col-8 which is centered -->
+            <div class="child-div">
+                <h3 id='title'>Write a Note</h3>
+                    <input id="note-input" type="text" class="form-control w-50 m-auto mb-2" placeholder="Do something..." />
+                <div id="note"></div>
+            </div>          
+            <script>
+                const userInput = document.getElementById("note-input")
+
+                userInput.addEventListener('change', (e)=>{
+                    const userValue = event.target.value;
+                    const cleanInput = DOMPurify.sanitize(userValue);
+                    document.getElementById('note').innerHTML = cleanInput;
+                
+                })
+            </script>     
+        </div>
+    </div>
+</div>
+
+{%endblock%}

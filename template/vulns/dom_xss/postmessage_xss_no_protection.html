@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{%block title%}DOM-base XSS No Protection 🪲{%endblock%}
+{%block head%}
+   
+{%endblock%}
+{%block body%}
+<div class="container">
+    <div class="row justify-content-center"> <!-- Use justify-content-center on the row -->
+        <div class="col-md-8 text-center"> <!-- col-md-8 limits width, text-center centers content -->
+            <h1>Lab #9 - DOM-based XSS No Protection 🪲</h1>
+            <hr class="w-100" /> <!-- hr centered by col-8 which is centered -->
+            <div class="child-div">
+                <h3 id='msg'>Get The message, using exploit server...</h3>
+                <div id="output"></div>
+            </div>
+            <script>
+                 // VULNERABLE - no origin validation
+            window.addEventListener('message', function(event) {
+                console.log('Message received from:', event.origin);
+                console.log('Message data:', event.data);
+                
+                // VULNERABLE - directly injecting HTML
+                document.getElementById('output').innerHTML = event.data;
+            });
+            document.getElementById('output').innerHTML = 'Waiting for postMessage...<br>Origin: ' + window.location.origin;
+            </script>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

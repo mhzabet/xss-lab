@@ -2,6 +2,7 @@ from django.shortcuts import render
 from . import forms 
 from .models import Stock
 from django.contrib import messages
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 def home_view(request):
     return render(request, 'home/home.html')
@@ -74,3 +75,11 @@ def stored_xss_no_protection_view(request):
 ## Lab 7
 def dom_xss_no_protection_view(request):
     return render(request, "vulns/dom_xss/dom_xss_no_protection.html")
+## Lab 8
+@xframe_options_exempt
+def postmessage_xss_no_protection_view(request):
+    return render(request, "vulns/dom_xss/postmessage_xss_no_protection.html")
+
+## Lab 9
+def dom_xss_dompurify_bypass_view(request):
+    return render(request, "vulns/dom_xss/dom_xss_dompurify_bypass.html")

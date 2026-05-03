@@ -14,10 +14,10 @@
                 <div id="welcome"></div>
             </div>          
             <script>
-                var name = document.location.hash.substring(1)
+                var name = document.location.hash.substring(1) // source
                 if (name){
                     document.getElementById("msg").innerText = 'Welcome too you......'
-                    document.getElementById("welcome").innerHTML = "Hello " + decodeURIComponent(name);
+                    document.getElementById("welcome").innerHTML = "Hello " + decodeURIComponent(name); // sink
                 }
             </script>     
         </div>
